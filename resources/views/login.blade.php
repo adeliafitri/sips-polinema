@@ -11,7 +11,7 @@
         <!-- <div class="card-header text-center">
           <a href="../index2.html" class="h1"><b>Admin</b>LTE</a>
         </div> -->
-        <div class="card-body bg-info">
+        <div class="card-body bg-success">
             <div class="row justify-content-center">
                 <div class="col-3 mb-2">
                     <img src="{{ asset('dist/img/logo_polinema.png') }}" width="75px" alt="logo Prodi Arsitektur UIN Malang">

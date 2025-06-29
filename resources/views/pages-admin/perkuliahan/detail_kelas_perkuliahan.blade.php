@@ -438,8 +438,9 @@
                         datasets: [{
                             label: 'Nilai rata-rata tugas',
                             data: response.values,
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
                             borderWidth: 1
                         }]
                     },
@@ -477,8 +478,9 @@
                         datasets: [{
                             label: 'Nilai rata-rata CPMK',
                             data: response.values,
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
                             borderWidth: 1
                         }]
                     },
@@ -516,8 +518,9 @@
                         datasets: [{
                             label: 'Nilai rata-rata Indikator Kinerja CPL',
                             data: response.values,
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
                             borderWidth: 1
                         }]
                     },
@@ -555,8 +558,9 @@
                         datasets: [{
                             label: 'Nilai rata-rata CPL',
                             data: response.values,
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
                             borderWidth: 1
                         }]
                     },

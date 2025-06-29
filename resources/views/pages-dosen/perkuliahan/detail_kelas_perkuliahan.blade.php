@@ -45,9 +45,9 @@
                     <p><span class="text-bold">Dosen :</span> {{ $data->nama_dosen }}</p>
                     <p><span class="text-bold">Jumlah Mahasiswa(Aktif) :</span> {{ $jumlah_mahasiswa->jumlah_mahasiswa }}</p>
                 </div>
-                <div class="col-sm-3">
+                {{-- <div class="col-sm-3">
                     <a href="{{ route('dosen.kelaskuliah.generateportof', $data->id) }}" class="btn btn-sm btn-primary"><i class="nav-icon fas fa-download mr-2"></i> Download Portfolio Perkuliahan</a>
-                </div>
+                </div> --}}
             </div>
         </div>
         <!-- /.card-body -->

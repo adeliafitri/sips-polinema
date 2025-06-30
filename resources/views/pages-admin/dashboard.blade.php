@@ -356,57 +356,46 @@
             success: function(response) {
                 $('#chartProdiContainer').empty();
 
-                ['D3', 'D4'].forEach(function(prodi) {
-                    if (response[prodi]) {
-                        const chartId = 'radarCPL' + prodi;
+                Object.entries(response).forEach(([prodi, data]) => {
+                    const chartId = 'radarCPL_' + prodi.replace(/\s+/g, '_'); // hindari spasi di ID
 
-                        $('#chartProdiContainer').append(`
-                            <div class="col-md-6">
-                                <div class="card card-info">
-                                    <div class="card-header">
-                                        <h3 class="card-title">CPL Prodi ${prodi} - Angkatan ${angkatan}</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <canvas id="${chartId}" style="min-height: 250px;"></canvas>
-                                    </div>
+                    $('#chartProdiContainer').append(`
+                        <div class="col-md-6">
+                            <div class="card card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">CPL Prodi ${prodi} - Angkatan ${angkatan}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="${chartId}" style="min-height: 250px;"></canvas>
                                 </div>
                             </div>
-                        `);
+                        </div>
+                    `);
 
-                        const ctx = document.getElementById(chartId).getContext('2d');
-
-                        // Hancurkan chart lama jika ada
-                        if (chartInstances[chartId]) {
-                            chartInstances[chartId].destroy();
-                        }
-
-                        chartInstances[chartId] = new Chart(ctx, {
-                            type: 'radar',
-                            data: {
-                                labels: response[prodi].labels,
-                                datasets: [{
-                                    label: `CPL Prodi ${prodi}`,
-                                    data: response[prodi].values,
-                                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                    borderColor: 'rgba(54, 162, 235, 1)',
-                                    pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-                                    borderWidth: 2
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    r: {
-                                        suggestedMin: 0,
-                                        suggestedMax: 100,
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }
+                    const ctx = document.getElementById(chartId).getContext('2d');
+                    new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: data.labels,
+                            datasets: [{
+                                label: `CPL ${prodi}`,
+                                data: data.values,
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scale: {
+                                ticks: {
+                                    beginAtZero: true,
+                                    min: 0,
+                                    max: 100
                                 }
                             }
-                        });
-                    }
+                        }
+                    });
                 });
             },
             error: function(error) {

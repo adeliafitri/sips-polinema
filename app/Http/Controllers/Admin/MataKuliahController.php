@@ -33,6 +33,7 @@ class MataKuliahController extends Controller
             });
         }
 
+        $query->orderBy('kode_matkul', 'ASC');
         $mata_kuliah = $query->paginate(20);
 
         $startNumber = ($mata_kuliah->currentPage() - 1) * $mata_kuliah->perPage() + 1;

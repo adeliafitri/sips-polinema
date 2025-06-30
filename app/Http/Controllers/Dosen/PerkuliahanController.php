@@ -108,7 +108,7 @@ class PerkuliahanController extends Controller
             });
         }
         // $query->distinct();
-        $mahasiswa = $query->orderBy('nim', 'asc')->distinct()->paginate(20);
+        $mahasiswa = $query->orderBy('nama', 'asc')->distinct()->paginate(20);
         // dd($mahasiswa);
         $startNumber = ($mahasiswa->currentPage() - 1) * $mahasiswa->perPage() + 1;
 

@@ -4,8 +4,8 @@
             <tr>
                 <th style="width: 10px">No</th>
                 <th>Kode CPL</th>
+                <th>Indikator Kinerja CPL</th>
                 <th>Kode CPMK</th>
-                <th>Kode Sub CPMK</th>
                 <th>Deskripsi</th>
             </tr>
         </thead>

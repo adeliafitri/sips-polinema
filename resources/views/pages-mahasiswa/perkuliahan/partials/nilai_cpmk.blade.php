@@ -4,7 +4,7 @@
             <tr>
                 <th style="width: 10px">No</th>
                 <th>Kode CPL</th>
-                <th>Kode CPMK</th>
+                <th>Indikator Kinerja CPL</th>
                 <th>Bobot Soal</th>
                 <th>Nilai</th>
             </tr>

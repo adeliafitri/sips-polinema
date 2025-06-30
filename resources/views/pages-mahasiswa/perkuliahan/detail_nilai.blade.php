@@ -82,7 +82,7 @@
                         <a class="nav-link active" role="tab" data-toggle="pill" href="#cpl-tab" aria-controls="cpl-tab" aria-selected="true" onclick="nilaiCpl({{ $data->matakuliah_kelasid }});" ><h6  style="font-weight: bold">Data CPL</h6></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" role="tab"  data-toggle="pill" href="#cpmk-tab" aria-controls="cpmk-tab" aria-selected="false" onclick="nilaiCpmk({{ $data->matakuliah_kelasid }});"><h6 style="font-weight: bold">Data CPMK</h6></a>
+                        <a class="nav-link" role="tab"  data-toggle="pill" href="#cpmk-tab" aria-controls="cpmk-tab" aria-selected="false" onclick="nilaiCpmk({{ $data->matakuliah_kelasid }});"><h6 style="font-weight: bold">Indikator Kinerja CPL</h6></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" role="tab"  data-toggle="pill" href="#tugas-tab" aria-controls="tugas-tab" aria-selected="false" onclick="nilaiTugas({{ $data->matakuliah_kelasid }});"><h6 style="font-weight: bold">Data Tugas</h6></a>
@@ -134,7 +134,7 @@
             <div class="col-md-6">
                 <div class="card card-info">
                     <div class="card-header">
-                      <h3 class="card-title">Capaian Pembelajaran Mata Kuliah</h3>
+                      <h3 class="card-title">Indikator Kinerja Capaian Pembelajaran Lulusan</h3>
 
                       <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -291,7 +291,7 @@
                     data: {
                         labels: response.labels,
                         datasets: [{
-                            label: 'Capaian Pembelajaran Mata Kuliah',
+                            label: 'Indikator Kinerja Capaian Pembelajaran Lulusan',
                             data: response.values,
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             borderColor: 'rgba(54, 162, 235, 1)',

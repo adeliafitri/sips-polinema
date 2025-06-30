@@ -598,29 +598,39 @@ class NilaiController extends Controller
 
     private function convertNilaiToHuruf($nilai)
     {
-        if ($nilai >= 85) {
+        if ($nilai > 80 && $nilai <= 100) {
                 return "A";
-            }elseif ($nilai >= 76) {
+            } elseif ($nilai > 73 && $nilai <= 80) {
                 return "B+";
-            }elseif ($nilai >= 71) {
+            } elseif ($nilai > 65 && $nilai <= 73) {
                 return "B";
-            }elseif ($nilai >= 66) {
+            } elseif ($nilai > 60 && $nilai <= 65) {
                 return "C+";
-            }elseif ($nilai >= 61) {
+            } elseif ($nilai > 50 && $nilai <= 60) {
                 return "C";
-            }elseif ($nilai >= 51) {
+            } elseif ($nilai > 39 && $nilai <= 50) {
                 return "D";
-            }else{
+            } else {
                 return "E";
             }
     }
 
     private function getKeterangan($nilai)
     {
-        if ($nilai >= 61) {
-                return "Lulus";
-            } else {
-                return "Tidak Lulus";
+        if ($nilai > 80 && $nilai <= 100) {
+                return "Sangat Baik";
+            }elseif ($nilai > 73 && $nilai <= 80) {
+                return "Lebih dari Baik";
+            }elseif ($nilai > 65 && $nilai <= 73) {
+                return "Baik";
+            }elseif ($nilai > 60 && $nilai <= 65) {
+                return "Lebih dari Cukup";
+            }elseif ($nilai > 50 && $nilai <= 60) {
+                return "Cukup";
+            }elseif ($nilai > 39 && $nilai <= 50) {
+                return "Kurang";
+            }else{
+                return "Gagal";
             }
     }
 }

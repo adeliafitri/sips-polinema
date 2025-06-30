@@ -235,7 +235,7 @@
                 <div class="col-md-6">
                     <div class="card card-info">
                         <div class="card-header">
-                          <h3 class="card-title">Penguasaan Sub-CPMK Di Kelas</h3>
+                          <h3 class="card-title">Penguasaan CPMK Di Kelas</h3>
 
                           <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -258,7 +258,7 @@
                 <div class="col-md-6">
                     <div class="card card-info">
                         <div class="card-header">
-                          <h3 class="card-title">Penguasaan CPMK Di Kelas</h3>
+                          <h3 class="card-title">Penguasaan Indikator Kinerja CPL Di Kelas</h3>
                           <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                               <i class="fas fa-minus"></i>
@@ -542,7 +542,7 @@
                     data: {
                         labels: response.labels,
                         datasets: [{
-                            label: 'Nilai rata-rata Sub-CPMK',
+                            label: 'Nilai rata-rata CPMK',
                             data: response.values,
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             borderColor: 'rgba(54, 162, 235, 1)',
@@ -582,7 +582,7 @@
                     data: {
                         labels: response.labels,
                         datasets: [{
-                            label: 'Nilai rata-rata CPMK',
+                            label: 'Nilai rata-rata Indikator Kinerja CPL',
                             data: response.values,
                             backgroundColor: 'rgba(54, 162, 235, 0.2)',
                             borderColor: 'rgba(54, 162, 235, 1)',

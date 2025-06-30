@@ -92,10 +92,10 @@
                                 <a class="nav-link active" role="tab" data-toggle="pill" href="#cpl-tab" aria-controls="cpl-tab" aria-selected="true" onclick="detailCpl({{ $data->id }});" ><h6  style="font-weight: bold">Data CPL</h6></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" role="tab"  data-toggle="pill" href="#cpmk-tab" aria-controls="cpmk-tab" aria-selected="false" onclick="detailCpmk({{ $data->id }});"><h6 style="font-weight: bold">Data CPMK</h6></a>
+                                <a class="nav-link" role="tab"  data-toggle="pill" href="#cpmk-tab" aria-controls="cpmk-tab" aria-selected="false" onclick="detailCpmk({{ $data->id }});"><h6 style="font-weight: bold">Indikator Kinerja CPL</h6></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" role="tab"  data-toggle="pill" href="#subcpmk-tab" aria-controls="subcpmk-tab" aria-selected="false" onclick="detailSubCpmk({{ $data->id }});"><h6 style="font-weight: bold">Data Sub CPMK</h6></a>
+                                <a class="nav-link" role="tab"  data-toggle="pill" href="#subcpmk-tab" aria-controls="subcpmk-tab" aria-selected="false" onclick="detailSubCpmk({{ $data->id }});"><h6 style="font-weight: bold">Data CPMK</h6></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" role="tab"  data-toggle="pill" href="#rps-tab" aria-controls="rps-tab" aria-selected="false" onclick="detailTugas({{ $data->id }});"><h6 style="font-weight: bold">Tugas</h6></a>

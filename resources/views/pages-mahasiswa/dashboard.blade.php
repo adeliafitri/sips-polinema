@@ -146,6 +146,7 @@
 @section('script')
 <script>
     $(document).ready(function() {
+        const nilaiMinimum = 60;
         // Fetch data from the controller
         $.ajax({
             url: "{{ url('/mahasiswa/dashboard/chart-cpl') }}",
@@ -156,14 +157,25 @@
                     type: 'radar',
                     data: {
                         labels: response.labels,
-                        datasets: [{
-                            label: 'Capaian Pembelajaran Lulusan',
-                            data: response.values,
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
+                        datasets: [
+                            {
+                                label: 'Nilai Minimum',
+                                data: Array(response.labels.length).fill(nilaiMinimum), // nilai sama untuk semua label
+                                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                                borderColor: 'rgba(255, 99, 132, 1)',      // ungu solid
+                                pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                                pointRadius: 3,
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Capaian Pembelajaran Lulusan',
+                                data: response.values,
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }
+                        ]
                     },
                     options: {
                         scale: {
@@ -191,14 +203,25 @@
                     type: 'radar',
                     data: {
                         labels: response.labels,
-                        datasets: [{
-                            label: 'Capaian Pembelajaran Lulusan Angkatan ' +  {{ $mahasiswa->angkatan }},
-                            data: response.values,
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            pointBackgroundColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
+                        datasets: [
+                            {
+                                label: 'Nilai Minimum',
+                                data: Array(response.labels.length).fill(nilaiMinimum), // nilai sama untuk semua label
+                                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                                borderColor: 'rgba(255, 99, 132, 1)',      // ungu solid
+                                pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                                pointRadius: 3,
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Capaian Pembelajaran Lulusan Angkatan ' +  {{ $mahasiswa->angkatan }},
+                                data: response.values,
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }
+                        ]
                     },
                     options: {
                         scale: {

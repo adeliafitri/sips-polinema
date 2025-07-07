@@ -346,6 +346,7 @@
     var initialSemesterId = $('#semesterSelect').val();
     chartSmtData(initialSemesterId);
 
+    const nilaiMinimum = 60;
     let chartInstances = {};
 
     function fetchChartDataByAngkatan(angkatan) {
@@ -377,7 +378,17 @@
                         type: 'radar',
                         data: {
                             labels: data.labels,
-                            datasets: [{
+                            datasets: [
+                            {
+                                label: 'Nilai Minimum',
+                                data: Array(data.labels.length).fill(nilaiMinimum), // nilai sama untuk semua label
+                                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                                borderColor: 'rgba(255, 99, 132, 1)',      // ungu solid
+                                pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                                pointRadius: 3,
+                                borderWidth: 1
+                            },
+                            {
                                 label: `CPL ${prodi}`,
                                 data: data.values,
                                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -497,7 +508,17 @@
                         type: 'radar',
                         data: {
                             labels: item.labels,
-                            datasets: [{
+                            datasets: [
+                            {
+                                label: 'Nilai Minimum',
+                                data: Array(item.labels.length).fill(nilaiMinimum), // nilai sama untuk semua label
+                                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                                borderColor: 'rgba(255, 99, 132, 1)',      // ungu solid
+                                pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                                pointRadius: 3,
+                                borderWidth: 1
+                            },
+                            {
                                 label: chartTitle,
                                 data: item.values,
                                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -506,14 +527,11 @@
                             }]
                         },
                         options: {
-                            scales: {
-                                r: {
+                            scale: {
+                                ticks: {
                                     beginAtZero: true,
                                     min: 0,
-                                    max: 100,
-                                    ticks: {
-                                        stepSize: 20
-                                    }
+                                    max: 100
                                 }
                             }
                         }

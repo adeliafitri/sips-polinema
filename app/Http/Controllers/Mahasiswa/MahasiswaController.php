@@ -44,44 +44,51 @@ class MahasiswaController extends Controller
         // ->where('mahasiswa.id_auth', Auth::user()->id)
         // ->sum('mata_kuliah.sks');
 
+
         $query = NilaiMahasiswa::join('mahasiswa', 'nilai_mahasiswa.mahasiswa_id', 'mahasiswa.id')
             ->join('soal_sub_cpmk', 'nilai_mahasiswa.soal_id', 'soal_sub_cpmk.id')
             ->join('sub_cpmk', 'soal_sub_cpmk.subcpmk_id', 'sub_cpmk.id')
             ->join('cpmk', 'sub_cpmk.cpmk_id', 'cpmk.id')
             ->join('cpl', 'cpmk.cpl_id', 'cpl.id')
-            ->join('rps', 'cpmk.rps_id', 'rps.id')
-            ->join('mata_kuliah', 'rps.matakuliah_id', 'mata_kuliah.id')
-            // ->selectRaw('cpl.id, cpl.kode_cpl, ROUND(SUM(nilai_mahasiswa.nilai * soal_sub_cpmk.bobot_soal) / SUM(soal_sub_cpmk.bobot_soal), 1) as rata_rata_cpl')
-            ->selectRaw('cpl.id, cpl.kode_cpl, ROUND(AVG(nilai_mahasiswa.nilai), 1) as rata_rata_cpl')
-            ->groupBy('cpl.id', 'cpmk.id')
-            ->where('mahasiswa.id_auth', Auth::user()->id);
+            ->where('mahasiswa.id_auth', Auth::user()->id)
+            ->select(
+                'cpmk.id as cpmk_id',
+                'cpl.id as cpl_id',
+                'cpl.kode_cpl',
+            )
+            ->selectRaw('ROUND(AVG(nilai_mahasiswa.nilai), 1) as rata_rata_cpmk')
+            ->groupBy('cpmk.id', 'cpl.id', 'cpl.kode_cpl');
 
-        // $sql = $query->toSql();
+        $cpmkNilai = $query->get(); // Sudah collection
+        $groupedByCpl = $cpmkNilai->groupBy('cpl_id');
 
-        $averageCPL = $query->get();
-
-        // dd($averageCPL);
-
-        $totalMataKuliah = Cpmk::join('cpl', 'cpmk.cpl_id', 'cpl.id')
-        ->join('rps', 'cpmk.rps_id', 'rps.id')
-        ->join('mata_kuliah', 'rps.matakuliah_id', 'mata_kuliah.id')
-        ->selectRaw('COUNT(distinct mata_kuliah.id) as total_matkul, cpl_id, cpl.kode_cpl')->groupBy('cpl_id')->get();
-            // dd($totalMataKuliah);
         $results = [];
 
-        foreach ($totalMataKuliah as $total) {
-            $cplId = $total->kode_cpl;
-            $totalMataKuliahCPL = $total->total_matkul;
+        foreach ($groupedByCpl as $cplId => $cpmkList) {
+            $kodeCpl = $cpmkList->first()->kode_cpl;
+            $totalCpmk = $cpmkList->count();
+            $cpmkLulus = $cpmkList->filter(fn($item) => $item->rata_rata_cpmk >= 60)->count();
 
-            $totalNilaiCPL = $averageCPL->where('kode_cpl', $cplId)->sum('rata_rata_cpl');
-            // dd($totalNilaiCPL);
-            $percentage = $totalMataKuliahCPL != 0 ? round(($totalNilaiCPL / ($totalMataKuliahCPL*100)) * 100, 2) : 0;
-            // dd($percentage);
+            $progress = $totalCpmk != 0 ? round(($cpmkLulus / $totalCpmk) * 100, 2) : 0;
+
             $results[] = [
-                'kode_cpl' => $cplId,
-                'persentase' => $percentage,
+                'kode_cpl' => $kodeCpl,
+                'progress' => $progress,
             ];
         }
+        // foreach ($totalMataKuliah as $total) {
+        //     $cplId = $total->kode_cpl;
+        //     $totalMataKuliahCPL = $total->total_matkul;
+
+        //     $totalNilaiCPL = $averageCPL->where('kode_cpl', $cplId)->sum('rata_rata_cpl');
+        //     // dd($totalNilaiCPL);
+        //     $percentage = $totalMataKuliahCPL != 0 ? round(($totalNilaiCPL / ($totalMataKuliahCPL*100)) * 100, 2) : 0;
+        //     // dd($percentage);
+        //     $results[] = [
+        //         'kode_cpl' => $cplId,
+        //         'persentase' => $percentage,
+        //     ];
+        // }
 
         // dd($results);
 

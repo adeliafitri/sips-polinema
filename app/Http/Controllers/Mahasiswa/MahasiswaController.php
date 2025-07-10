@@ -76,25 +76,9 @@ class MahasiswaController extends Controller
                 'progress' => $progress,
             ];
         }
-        // foreach ($totalMataKuliah as $total) {
-        //     $cplId = $total->kode_cpl;
-        //     $totalMataKuliahCPL = $total->total_matkul;
 
-        //     $totalNilaiCPL = $averageCPL->where('kode_cpl', $cplId)->sum('rata_rata_cpl');
-        //     // dd($totalNilaiCPL);
-        //     $percentage = $totalMataKuliahCPL != 0 ? round(($totalNilaiCPL / ($totalMataKuliahCPL*100)) * 100, 2) : 0;
-        //     // dd($percentage);
-        //     $results[] = [
-        //         'kode_cpl' => $cplId,
-        //         'persentase' => $percentage,
-        //     ];
-        // }
-
-        // dd($results);
-
-        // dd($sql, $results);
-
-        // dd($totalAverageCPL);
+        $results = collect($results)->sortBy('kode_cpl')->values()->all();
+        
         return view('pages-mahasiswa.dashboard', [
             'total_sks' => $total_sks,
             // 'total_sks_diambil' => $total_sks_diambil,

@@ -77,8 +77,13 @@ class MahasiswaController extends Controller
             ];
         }
 
-        $results = collect($results)->sortBy('kode_cpl')->values()->all();
-        
+        $results = collect($results)->sortBy(function ($item) {
+            // Ambil angka setelah D4_ dan konversi ke integer
+            return (int) filter_var($item['kode_cpl'], FILTER_SANITIZE_NUMBER_INT);
+        })->values()->all();
+
+        // $results = collect($results)->sortBy('kode_cpl')->values()->all();
+
         return view('pages-mahasiswa.dashboard', [
             'total_sks' => $total_sks,
             // 'total_sks_diambil' => $total_sks_diambil,

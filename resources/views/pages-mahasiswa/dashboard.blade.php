@@ -106,9 +106,9 @@
                         </div>
                         <div class="col-md-10">
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{ $datas['persentase'] }}" aria-valuemin="0"
-                                    aria-valuemax="100" style="width: {{ $datas['persentase'] }}%">
-                                <span>{{ $datas['persentase'] }}%</span>
+                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{ $datas['progress'] }}" aria-valuemin="0"
+                                    aria-valuemax="100" style="width: {{ $datas['progress'] }}%">
+                                <span>{{ $datas['progress'] }}%</span>
                                 </div>
                             </div>
                         </div>

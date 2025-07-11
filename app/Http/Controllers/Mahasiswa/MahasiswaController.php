@@ -90,7 +90,10 @@ class MahasiswaController extends Controller
 
         foreach ($indikatorCPL as $cplId => $cpmkList) {
             $kodeCpl = $cpmkList->first()->kode_cpl;
-            $totalCpmk = $cpmkList->count();
+            // $totalCpmk = $cpmkList->count();
+            $totalCpmk = $cpmkList->filter(function ($item) use ($query) {
+                return $query->has($item->cpmk_id);
+            })->count();
             // dd($cpmkList);
             // $cpmkLulus = $cpmkList->filter(fn($item) => $item->rata_rata_cpmk >= 60)->count();
 

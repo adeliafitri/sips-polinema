@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Models\Cpmk;
 use App\Models\Mahasiswa;
 use App\Models\MataKuliah;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\NilaiMahasiswa;
 use App\Models\NilaiAkhirMahasiswa;
@@ -43,31 +44,62 @@ class MahasiswaController extends Controller
         // ->join('mata_kuliah', 'rps.matakuliah_id', 'mata_kuliah.id')
         // ->where('mahasiswa.id_auth', Auth::user()->id)
         // ->sum('mata_kuliah.sks');
+        $angkatan = $mahasiswa->angkatan;
+        $prodi = strtoupper($mahasiswa->program_studi);
 
+        if (Str::contains($prodi, 'D4')) {
+            $prefix = 'RKI';
+        } elseif (Str::contains($prodi, 'D3')) {
+            $prefix = 'RKM';
+        } else {
+            $prefix = ''; // fallback
+        }
+
+        $kodeMkPrefix = $prefix . substr($angkatan, -2);
+
+        $indikatorCPL = Cpmk::join('cpl', 'cpmk.cpl_id', '=', 'cpl.id')
+        ->join('rps', 'cpmk.rps_id', '=', 'rps.id')
+        ->join('mata_kuliah', 'rps.matakuliah_id', '=', 'mata_kuliah.id')
+        ->where('mata_kuliah.kode_matkul', 'like', $kodeMkPrefix . '%')
+        ->select('cpmk.id as cpmk_id', 'cpl.id as cpl_id', 'cpl.kode_cpl')
+        ->get()
+        ->groupBy('cpl_id');
+
+        // dd($indikatorCPL);
 
         $query = NilaiMahasiswa::join('mahasiswa', 'nilai_mahasiswa.mahasiswa_id', 'mahasiswa.id')
             ->join('soal_sub_cpmk', 'nilai_mahasiswa.soal_id', 'soal_sub_cpmk.id')
             ->join('sub_cpmk', 'soal_sub_cpmk.subcpmk_id', 'sub_cpmk.id')
             ->join('cpmk', 'sub_cpmk.cpmk_id', 'cpmk.id')
-            ->join('cpl', 'cpmk.cpl_id', 'cpl.id')
+            // ->join('cpl', 'cpmk.cpl_id', 'cpl.id')
             ->where('mahasiswa.id_auth', Auth::user()->id)
-            ->select(
-                'cpmk.id as cpmk_id',
-                'cpl.id as cpl_id',
-                'cpl.kode_cpl',
-            )
-            ->selectRaw('ROUND(AVG(nilai_mahasiswa.nilai), 1) as rata_rata_cpmk')
-            ->groupBy('cpmk.id', 'cpl.id', 'cpl.kode_cpl');
+            // ->select(
+            //     'cpmk.id as cpmk_id',
+            //     'cpl.id as cpl_id',
+            //     'cpl.kode_cpl',
+            // )
+            ->selectRaw('cpmk.id as cpmk_id, ROUND(AVG(nilai_mahasiswa.nilai), 1) as rata_rata_cpmk')
+            ->groupBy('cpmk.id')
+            ->get()
+            ->keyBy('cpmk_id');
 
-        $cpmkNilai = $query->get(); // Sudah collection
-        $groupedByCpl = $cpmkNilai->groupBy('cpl_id');
+        // $cpmkNilai = $query->get(); // Sudah collection
+        // $groupedByCpl = $cpmkNilai->groupBy('cpl_id');
 
         $results = [];
 
-        foreach ($groupedByCpl as $cplId => $cpmkList) {
+        foreach ($indikatorCPL as $cplId => $cpmkList) {
             $kodeCpl = $cpmkList->first()->kode_cpl;
             $totalCpmk = $cpmkList->count();
-            $cpmkLulus = $cpmkList->filter(fn($item) => $item->rata_rata_cpmk >= 60)->count();
+            // dd($cpmkList);
+            // $cpmkLulus = $cpmkList->filter(fn($item) => $item->rata_rata_cpmk >= 60)->count();
+
+            $cpmkLulus = $cpmkList->filter(function ($item) use ($query) {
+                $nilai = $query->get($item->cpmk_id);
+                return $nilai && $nilai->rata_rata_cpmk >= 60;
+            })->count();
+
+            // dd($cpmkLulus);
 
             $progress = $totalCpmk != 0 ? round(($cpmkLulus / $totalCpmk) * 100, 2) : 0;
 

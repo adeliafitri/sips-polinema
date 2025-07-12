@@ -61,6 +61,7 @@ class MataKuliahController extends Controller
             'kode_matkul' => 'required|unique:mata_kuliah,kode_matkul',
             'nama_matkul' => 'required|string',
             'sks' => 'required|numeric',
+            'is_pilihan' => 'nullable|boolean',
         ]);
 
         if ($validate->fails()) {
@@ -75,6 +76,7 @@ class MataKuliahController extends Controller
                 'kode_matkul' => $request->kode_matkul,
                 'nama_matkul' => $request->nama_matkul,
                 'sks' => $request->sks,
+                'is_pilihan' => $request->is_pilihan ? true : false,
             ]);
 
             // return redirect()->route('admin.matakuliah')->with('success', 'Data Berhasil Ditambahkan');
@@ -120,6 +122,7 @@ class MataKuliahController extends Controller
             'kode_matkul' => 'required',
             'nama_matkul' => 'required|string',
             'sks' => 'required|numeric',
+            'is_pilihan' => 'nullable|boolean',
         ]);
 
         if ($validate->fails()) {
@@ -135,6 +138,7 @@ class MataKuliahController extends Controller
                 'kode_matkul' => $request->kode_matkul,
                 'nama_matkul' => $request->nama_matkul,
                 'sks' => $request->sks,
+                'is_pilihan' => $request->is_pilihan ? true : false,
             ]);
 
             // return redirect()->route('admin.matakuliah')->with([

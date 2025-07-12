@@ -56,6 +56,7 @@
                             <th>Kode Mata Kuliah</th>
                             <th>Nama Mata Kuliah</th>
                             <th>SKS</th>
+                            <th>Jenis Mata Kuliah</th>
                             <th style="width: 150px;">Action</th>
                           </tr>
                         </thead>
@@ -75,6 +76,13 @@
                                 </div>
                               </td>
                               <td>{{ $datas->sks }}</td>
+                                <td>
+                                    @if ($datas->is_pilihan)
+                                        Pilihan
+                                    @else
+                                        Wajib
+                                    @endif
+                                </td>
                               <td class="d-flex justify-content-center">
                                   {{-- <a href="{{ route('admin.rps.create', $datas->id) }}" class="btn btn-primary mr-1" data-toggle="tooltip" data-placement="top" title="Tambah data RPS"><i class="nav-icon fas fa-plus"></i></a> --}}
                                    {{-- <a href="{{ route('admin.matakuliah.show', $datas->id) }}" class="btn btn-info mr-1"><i class="nav-icon far fa-eye" ></i></a> --}}

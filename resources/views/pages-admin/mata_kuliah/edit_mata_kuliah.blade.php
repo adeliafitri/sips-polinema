@@ -54,6 +54,14 @@
                     <label for="sks">SKS</label>
                         <input type="number" class="form-control" id="sks" rows="3" name="sks" placeholder="SKS" value="{{ $data->sks }}">
                     </div>
+                    <div>
+                    <label for="is_pilihan">Jenis Mata Kuliah</label>
+                        <select class="form-control" id="is_pilihan" name="is_pilihan">
+                            <option value="">Pilih Jenis Mata Kuliah</option>
+                            <option value="1" {{ $data->is_pilihan ? 'selected' : '' }}>Pilihan</option>
+                            <option value="0" {{ !$data->is_pilihan ? 'selected' : '' }}>Wajib</option>
+                        </select>
+                    </div>
                 </div>
                  <!-- /.card-body -->
                 <div class="card-footer clearfix">

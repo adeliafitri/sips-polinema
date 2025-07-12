@@ -61,11 +61,10 @@ class MahasiswaController extends Controller
         ->join('rps', 'cpmk.rps_id', '=', 'rps.id')
         ->join('mata_kuliah', 'rps.matakuliah_id', '=', 'mata_kuliah.id')
         ->where('mata_kuliah.kode_matkul', 'like', $kodeMkPrefix . '%')
-        ->select('cpmk.id as cpmk_id', 'cpl.id as cpl_id', 'cpl.kode_cpl')
+        ->select('cpmk.id as cpmk_id', 'cpl.id as cpl_id', 'cpl.kode_cpl', 'mata_kuliah.is_pilihan')
+        // ->distinct()
         ->get()
         ->groupBy('cpl_id');
-
-        // dd($indikatorCPL);
 
         $query = NilaiMahasiswa::join('mahasiswa', 'nilai_mahasiswa.mahasiswa_id', 'mahasiswa.id')
             ->join('soal_sub_cpmk', 'nilai_mahasiswa.soal_id', 'soal_sub_cpmk.id')
@@ -90,19 +89,29 @@ class MahasiswaController extends Controller
 
         foreach ($indikatorCPL as $cplId => $cpmkList) {
             $kodeCpl = $cpmkList->first()->kode_cpl;
+            // dd($cpmkList->pluck('cpmk_id'));
             // $totalCpmk = $cpmkList->count();
-            $totalCpmk = $cpmkList->filter(function ($item) use ($query) {
-                return $query->has($item->cpmk_id);
-            })->count();
-            // dd($cpmkList);
-            // $cpmkLulus = $cpmkList->filter(fn($item) => $item->rata_rata_cpmk >= 60)->count();
+            // $totalCpmk = $cpmkList->filter(function ($item) use ($query) {
+            //     return $query->has($item->cpmk_id);
+            // })->count();
+            // // dd($cpmkList);
+            // // $cpmkLulus = $cpmkList->filter(fn($item) => $item->rata_rata_cpmk >= 60)->count();
 
-            $cpmkLulus = $cpmkList->filter(function ($item) use ($query) {
+            // $cpmkLulus = $cpmkList->filter(function ($item) use ($query) {
+            //     $nilai = $query->get($item->cpmk_id);
+            //     return $nilai && $nilai->rata_rata_cpmk > 60;
+            // })->count();
+
+             $filteredCpmk = $cpmkList->unique('cpmk_id')->filter(function ($item) use ($query) {
+                return !$item->is_pilihan || ($item->is_pilihan && $query->has($item->cpmk_id));
+            });
+
+            $totalCpmk = $filteredCpmk->count();
+
+            $cpmkLulus = $filteredCpmk->filter(function ($item) use ($query) {
                 $nilai = $query->get($item->cpmk_id);
                 return $nilai && $nilai->rata_rata_cpmk > 60;
             })->count();
-
-            // dd($cpmkLulus);
 
             $progress = $totalCpmk != 0 ? round(($cpmkLulus / $totalCpmk) * 100, 2) : 0;
 

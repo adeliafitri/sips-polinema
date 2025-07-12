@@ -64,6 +64,14 @@
                                             <input type="number" class="form-control" id="sks" name="sks"
                                                 placeholder="SKS">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="is_pilihan">Jenis Mata Kuliah</label>
+                                            <select class="form-control" id="is_pilihan" name="is_pilihan">
+                                                <option value="">Pilih Jenis Mata Kuliah</option>
+                                                <option value="1">Pilihan</option>
+                                                <option value="0">Wajib</option>
+                                            </select>
+                                        </div>
                                         <a href="{{ route('admin.matakuliah') }}" class="btn btn-default">Batal</a>
                                         <button type="button" class="btn btn-primary" onclick="addData()">Simpan</button>
                                     </div>

@@ -266,7 +266,7 @@
     var initialSemesterId = $('#semesterSelect').val();
     chartSmtData(initialSemesterId);
 
-    const nilaiMinimum = 60;
+    const nilaiMinimum = 50;
     let chartInstances = {};
 
     function fetchChartDataByAngkatan(angkatan) {

@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('mahasiswa.dashboard') }}" class="brand-link">
-        <img src="{{ asset('dist/img/logo-tekkim-polinema.png') }}" alt="Logo Teknik Kimia Polinema" class="brand-image" style="opacity: .8">
-        <span class="brand-text font-weight-dark text-xs text-uppercase">Prodi S1 Teknik Arsitektur</span>
+        <img src="{{ asset('dist/img/logo-tekkim-polinema.png') }}" alt="Logo Teknik Kimia Polinema" class="brand-image" style="max-width: 80px; height: auto; opacity: .8">
+        <span class="brand-text font-weight-dark text-xs text-uppercase">Jurusan Teknik Kimia</span>
     </a>
 
     @php

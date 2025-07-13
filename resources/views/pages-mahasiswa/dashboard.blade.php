@@ -146,7 +146,7 @@
 @section('script')
 <script>
     $(document).ready(function() {
-        const nilaiMinimum = 60;
+        const nilaiMinimum = 50;
         // Fetch data from the controller
         $.ajax({
             url: "{{ url('/mahasiswa/dashboard/chart-cpl') }}",

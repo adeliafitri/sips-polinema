@@ -39,8 +39,8 @@
                 <div class="row">
                   <div class="col-6">
                     <p><span class="text-bold">Semester :</span> {{ $data->tahun_ajaran }} {{ $data->semester }}</p>
+                    <p><span class="text-bold">Kode Mata Kuliah :</span> {{ $data->kode_matkul }}</p>
                     <p><span class="text-bold">Mata Kuliah :</span> {{ $data->nama_matkul }} </p>
-                    <p><span class="text-bold">Kelas:</span> {{ $data->nama_kelas }} </p>
                     <div class="dropdown col-sm-3">
                         <button class="btn btn-primary w-100 dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                              Lihat RPS
@@ -53,6 +53,7 @@
                     </div>
                   </div>
                   <div class="col-6">
+                    <p><span class="text-bold">Kelas:</span> {{ $data->nama_kelas }} </p>
                     <p><span class="text-bold">Dosen :</span> {{ $data->nama }} </p>
                     <p><span class="text-bold">Nilai Akhir :</span> {{ $data->nilai_akhir }} </p>
                     {{-- <h5 class="text-bold">Suplementary File</h5>

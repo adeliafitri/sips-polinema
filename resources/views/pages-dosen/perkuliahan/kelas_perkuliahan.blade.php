@@ -75,6 +75,7 @@
                             <th style="width: 10px">No</th>
                             <th style="width: 150px;">Tahun Ajaran</th>
                             <th style="width: 100px;">Semester</th>
+                            <th>Kode Mata Kuliah</th>
                             <th>Mata Kuliah</th>
                             <th>Kelas</th>
                             {{-- <th>Dosen</th> --}}
@@ -89,6 +90,7 @@
                               <td>{{ $startNumber++ }}</td>
                               <td>{{ $datas->tahun_ajaran }}</td>
                               <td class="text-capitalize">{{ $datas->semester }}</td>
+                              <td>{{ $datas->kode_matkul }}</td>
                               <td>{{ $datas->nama_matkul }}</td>
                               <td>{{ $datas->kelas }}</td>
                               {{-- <td>{{ $datas->nama_dosen }}</td> --}}

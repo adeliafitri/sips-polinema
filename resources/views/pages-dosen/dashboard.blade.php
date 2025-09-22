@@ -36,7 +36,7 @@
                         @foreach($mataKuliah as $matkul)
                             <option value="{{ $matkul->id }}"
                                 {{ request('matkul_id') == $matkul->id ? 'selected' : '' }}>
-                                {{ $matkul->nama_matkul }}
+                                {{ $matkul->kode_matkul }} - {{ $matkul->nama_matkul }}
                             </option>
                         @endforeach
                     </select>

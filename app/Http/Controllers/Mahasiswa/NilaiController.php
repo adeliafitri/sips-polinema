@@ -26,7 +26,7 @@ class NilaiController extends Controller
         ->join('semester', 'matakuliah_kelas.semester_id', '=', 'semester.id')
         ->leftJoin('nilaiakhir_mahasiswa', 'matakuliah_kelas.id', '=', 'nilaiakhir_mahasiswa.matakuliah_kelasid')
         ->join('mahasiswa', 'mahasiswa.id', '=', 'nilaiakhir_mahasiswa.mahasiswa_id')
-        ->select('matakuliah_kelas.id as id_kelas', 'nilaiakhir_mahasiswa.nilai_akhir','matakuliah_kelas.*', 'semester.tahun_ajaran', 'semester.semester', 'kelas.nama_kelas as kelas', 'mata_kuliah.nama_matkul as nama_matkul', 'dosen.nama as nama_dosen')
+        ->select('matakuliah_kelas.id as id_kelas', 'nilaiakhir_mahasiswa.nilai_akhir','matakuliah_kelas.*', 'semester.tahun_ajaran', 'semester.semester', 'kelas.nama_kelas as kelas', 'mata_kuliah.kode_matkul as kode_matkul', 'mata_kuliah.nama_matkul as nama_matkul', 'dosen.nama as nama_dosen')
         // ->selectRaw('COUNT(nilaiakhir_mahasiswa.mahasiswa_id) as jumlah_mahasiswa')
         ->where('mahasiswa.id_auth', Auth::user()->id);
 
@@ -90,7 +90,7 @@ class NilaiController extends Controller
             ->join('semester', 'matakuliah_kelas.semester_id', 'semester.id')
             ->join('dosen', 'matakuliah_kelas.dosen_id', 'dosen.id')
             ->join('kelas', 'matakuliah_kelas.kelas_id', 'kelas.id')
-            ->select( 'rps.id as id_rps', 'mata_kuliah.id as id_matkul', 'mata_kuliah.nama_matkul', 'dosen.nama', 'kelas.nama_kelas', 'semester.tahun_ajaran', 'semester.semester', 'nilaiakhir_mahasiswa.*')
+            ->select( 'rps.id as id_rps', 'mata_kuliah.id as id_matkul', 'mata_kuliah.kode_matkul as kode_matkul', 'mata_kuliah.nama_matkul', 'dosen.nama', 'kelas.nama_kelas', 'semester.tahun_ajaran', 'semester.semester', 'nilaiakhir_mahasiswa.*')
             // ->distinct()
             ->where('nilaiakhir_mahasiswa.matakuliah_kelasid', $id)
             ->where('nilaiakhir_mahasiswa.mahasiswa_id', $id_mahasiswa->id)

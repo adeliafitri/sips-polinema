@@ -38,7 +38,7 @@ class PerkuliahanController extends Controller
             ->join('dosen', 'matakuliah_kelas.dosen_id', '=', 'dosen.id')
             ->join('semester', 'matakuliah_kelas.semester_id', '=', 'semester.id')
             ->leftJoin('nilaiakhir_mahasiswa', 'matakuliah_kelas.id', '=', 'nilaiakhir_mahasiswa.matakuliah_kelasid')
-            ->select('matakuliah_kelas.id','semester.id as id_smt', 'semester.tahun_ajaran', 'semester.semester', 'kelas.nama_kelas as kelas','mata_kuliah.id as id_matkul', 'mata_kuliah.nama_matkul as nama_matkul', 'dosen.nama as nama_dosen', 'rps.tahun_rps')
+            ->select('matakuliah_kelas.id','semester.id as id_smt', 'semester.tahun_ajaran', 'semester.semester', 'kelas.nama_kelas as kelas','mata_kuliah.id as id_matkul', 'mata_kuliah.nama_matkul as nama_matkul', 'mata_kuliah.kode_matkul as kode_matkul','dosen.nama as nama_dosen', 'rps.tahun_rps')
             ->selectRaw('COUNT(nilaiakhir_mahasiswa.mahasiswa_id) as jumlah_mahasiswa');
 
             if ($request->has('tahun_ajaran')) {
@@ -87,6 +87,7 @@ class PerkuliahanController extends Controller
                 $data[$tahun_ajaran][$semester][$nama_matkul] = [
                     'id_smt' => $item->id_smt,
                     'id_matkul' => $item->id_matkul,
+                    'kode_matkul' => $item->kode_matkul,
                     'info_kelas' => []
                 ];
             }
@@ -111,6 +112,7 @@ class PerkuliahanController extends Controller
                         'id_matkul' => $info['id_matkul'],
                         'tahun_ajaran' => $tahun_ajaran,
                         'semester' => $semester,
+                        'kode_matkul' => $info['kode_matkul'],
                         'nama_matkul' => $nama_matkul,
                         'info_kelas' => $info['info_kelas'],
                     ];
@@ -277,6 +279,7 @@ class PerkuliahanController extends Controller
                 'semester.tahun_ajaran',
                 'semester.semester',
                 'kelas.nama_kelas as kelas',
+                'mata_kuliah.kode_matkul as kode_matkul',
                 'mata_kuliah.nama_matkul as nama_matkul',
                 'dosen.nama as nama_dosen',
                 'rps.tahun_rps'

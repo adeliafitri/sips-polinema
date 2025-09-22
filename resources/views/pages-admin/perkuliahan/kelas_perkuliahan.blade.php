@@ -108,6 +108,7 @@
                             <th style="width: 10px">No</th>
                             <th style="width: 150px;">Tahun Ajaran</th>
                             <th style="width: 100px;">Semester</th>
+                            <th>Kode Mata Kuliah</th>
                             <th>Mata Kuliah</th>
                             <th>Tahun RPS</th>
                             <th>Kelas</th>
@@ -129,6 +130,7 @@
                                 <td rowspan="{{ $rowCount }}">{{ $startNumber++ }}</td>
                                 <td rowspan="{{ $rowCount }}">{{ $datas['tahun_ajaran'] }}</td>
                                 <td rowspan="{{ $rowCount }}" class="text-capitalize">{{ $datas['semester'] }}</td>
+                                <td rowspan="{{ $rowCount }}">{{ $datas['kode_matkul'] }}</td>
                                 <td rowspan="{{ $rowCount }}">{{ $datas['nama_matkul'] }}
                                     <div class="mt-2">
                                         <a href="{{ route('admin.kelaskuliah.create', [

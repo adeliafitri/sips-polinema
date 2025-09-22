@@ -33,7 +33,7 @@ class PerkuliahanController extends Controller
             ->join('dosen', 'matakuliah_kelas.dosen_id', '=', 'dosen.id')
             ->join('semester', 'matakuliah_kelas.semester_id', '=', 'semester.id')
             ->leftJoin('nilaiakhir_mahasiswa', 'matakuliah_kelas.id', '=', 'nilaiakhir_mahasiswa.matakuliah_kelasid')
-            ->select('matakuliah_kelas.*', 'semester.tahun_ajaran', 'semester.semester', 'kelas.nama_kelas as kelas', 'mata_kuliah.nama_matkul as nama_matkul', 'dosen.nama as nama_dosen')
+            ->select('matakuliah_kelas.*', 'semester.tahun_ajaran', 'semester.semester', 'kelas.nama_kelas as kelas','mata_kuliah.kode_matkul as kode_matkul', 'mata_kuliah.nama_matkul as nama_matkul', 'dosen.nama as nama_dosen')
             ->selectRaw('COUNT(nilaiakhir_mahasiswa.mahasiswa_id) as jumlah_mahasiswa')
             ->where('dosen.id_auth', Auth::user()->id);
 
@@ -84,6 +84,7 @@ class PerkuliahanController extends Controller
                 'semester.tahun_ajaran',
                 'semester.semester',
                 'kelas.nama_kelas as kelas',
+                'mata_kuliah.kode_matkul as kode_matkul',
                 'mata_kuliah.nama_matkul as nama_matkul',
                 'dosen.nama as nama_dosen',
                 'dosen.status',

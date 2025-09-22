@@ -81,6 +81,7 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">No</th>
+                      <th>Kode Mata Kuliah</th>
                       <th>Mata Kuliah</th>
                       {{-- <th>Status</th> --}}
                       <th>Kelas</th>
@@ -93,6 +94,7 @@
                   @foreach ($data as $key => $datas)
                     <tr>
                         <td>{{ $startNumber++ }}</td>
+                        <td>{{ $datas->kode_matkul }}</td>
                         <td>{{ $datas->nama_matkul }}</td>
                         {{-- <td>{{ $datas->status }}</td> --}}
                         <td>{{ $datas->kelas }}</td>

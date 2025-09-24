@@ -110,7 +110,7 @@ class MahasiswaController extends Controller
 
             $cpmkLulus = $filteredCpmk->filter(function ($item) use ($query) {
                 $nilai = $query->get($item->cpmk_id);
-                return $nilai && $nilai->rata_rata_cpmk > 60;
+                return $nilai && $nilai->rata_rata_cpmk >= 50;
             })->count();
 
             $progress = $totalCpmk != 0 ? round(($cpmkLulus / $totalCpmk) * 100, 2) : 0;
